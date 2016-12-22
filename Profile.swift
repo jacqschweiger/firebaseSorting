@@ -17,9 +17,9 @@ class Profile {
     var name: String
     var age: Int
     var profileImage: UIImage
-    var hobbies: [String]
+    var hobbies: String
     
-    init(userID: Int, gender: String, name: String, age: Int, profileImage: UIImage, hobbies: [String]) {
+    init(userID: Int, gender: String, name: String, age: Int, profileImage: UIImage, hobbies: String) {
         self.userID = userID
         self.gender = gender
         self.name = name

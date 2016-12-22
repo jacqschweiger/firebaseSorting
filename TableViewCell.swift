@@ -6,19 +6,37 @@
 //  Copyright © 2016 Jacqueline Minneman. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class TableViewCell: UITableViewCell {
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    @IBOutlet weak var userIDLabel: UILabel!
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    @IBOutlet weak var profileImage: UIImageView!
+    
+    @IBOutlet weak var hobbiesLabel: UILabel!
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var ageLabel: UILabel!
+    
+    @IBOutlet weak var genderLabel: UILabel!
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        // Configure the view for the selected state
+        
+        
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+
+
+        
+
 }
+

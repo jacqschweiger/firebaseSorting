@@ -29,8 +29,13 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath) //as! TableViewCell
-        cell.textLabel?.text = profiles[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath) as! TableViewCell
+        cell.userIDLabel?.text = "ID: \(profiles[indexPath.row].userID)"
+        cell.profileImage.image = profiles[indexPath.row].profileImage
+        cell.hobbiesLabel.text = "Hobbies: \(profiles[indexPath.row].hobbies)"
+        cell.nameLabel?.text = profiles[indexPath.row].name
+        cell.ageLabel?.text = "Age \(profiles[indexPath.row].age)"
+        cell.genderLabel?.text = profiles[indexPath.row].gender.capitalized
         cell.backgroundColor = profiles[indexPath.row].backgroundColor
         return cell
     }
@@ -47,9 +52,9 @@ class TableViewController: UITableViewController {
     
     
     func createProfiles(){
-        let profile1 = Profile(userID: 111, gender: "female", name: "Lucy", age: 7, profileImage: #imageLiteral(resourceName: "puppy"), hobbies: ["barking", "playing"])
-        let profile2 = Profile(userID: 112, gender: "male", name: "Buddy", age: 5, profileImage: #imageLiteral(resourceName: "puppy"), hobbies: ["barking", "playing"])
-        let profile3 = Profile(userID: 113, gender: "female", name: "Ruby", age: 3, profileImage: #imageLiteral(resourceName: "puppy"), hobbies: ["barking", "playing", "eating"])
+        let profile1 = Profile(userID: 111, gender: "female", name: "Lucy", age: 7, profileImage: #imageLiteral(resourceName: "puppy"), hobbies: "barking, playing")
+        let profile2 = Profile(userID: 112, gender: "male", name: "Buddy", age: 5, profileImage: #imageLiteral(resourceName: "puppy"), hobbies: "barking, playing")
+        let profile3 = Profile(userID: 113, gender: "female", name: "Ruby", age: 3, profileImage: #imageLiteral(resourceName: "puppy"), hobbies: "barking, playing")
         
         profiles = [profile1, profile2, profile3]
     }

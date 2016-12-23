@@ -9,16 +9,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Profile Table View Controller-->
         <scene sceneID="rxX-ph-Adl">
             <objects>
-                <tableViewController id="dzr-zd-b34" customClass="TableViewController" customModule="firebaseProject" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="dzr-zd-b34" customClass="ProfileTableViewController" customModule="firebaseProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="169" sectionHeaderHeight="28" sectionFooterHeight="28" id="Xr6-hH-Wsr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="basicCell" rowHeight="169" id="xCE-NB-DGE" customClass="TableViewCell" customModule="firebaseProject" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="basicCell" rowHeight="169" id="xCE-NB-DGE" customClass="ProfileTableViewCell" customModule="firebaseProject" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="169"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xCE-NB-DGE" id="a0D-xA-X36">
@@ -73,7 +73,7 @@
                                     <outlet property="nameLabel" destination="7bT-20-2hf" id="o70-zm-AiY"/>
                                     <outlet property="profileImage" destination="8Dr-CQ-Qgg" id="RAc-Ug-WF1"/>
                                     <outlet property="userIDLabel" destination="hdU-Sa-zFR" id="d9S-Zn-Gv9"/>
-                                    <segue destination="gsd-PR-OiE" kind="push" identifier="showDetail" id="GyC-tK-7sq"/>
+                                    <segue destination="gsd-PR-OiE" kind="show" identifier="showDetail" id="GyC-tK-7sq"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -88,10 +88,10 @@
             </objects>
             <point key="canvasLocation" x="696.79999999999995" y="108.39580209895054"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="IsF-L5-9Wi">
             <objects>
-                <viewController id="gsd-PR-OiE" customClass="ProfileViewController" customModule="firebaseProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gsd-PR-OiE" customClass="DetailViewController" customModule="firebaseProject" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wtC-PL-efe"/>
                         <viewControllerLayoutGuide type="bottom" id="CCJ-Ww-MoH"/>

@@ -124,6 +124,7 @@ class ProfileTableViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    //TODO: use firebase query to sort so dynamic
     func sortAToZ() {
         self.profiles.sort { (profile1, profile2) -> Bool in
             profile1.name < profile2.name

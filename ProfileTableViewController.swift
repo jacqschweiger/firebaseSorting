@@ -13,7 +13,7 @@ class ProfileTableViewController: UITableViewController {
     
     var profiles = [Profile]()
 
-    let ref = FIRDatabase.database().reference()
+    let ref = FIRDatabase.database().reference(withPath: "profile_names")
     
     @IBAction func addButtonTapped(_ sender: Any) {
         print("add button tapped")
@@ -56,7 +56,16 @@ class ProfileTableViewController: UITableViewController {
         createProfiles()
         
         ref.observe(.value, with: { snapshot in
-            print(snapshot.value)
+            var newProfiles: [Profile] = []
+
+            for profile in snapshot.children {
+
+                let newProfile = Profile(snapshot: profile as! FIRDataSnapshot)
+                newProfiles.append(newProfile)
+            }
+
+            self.profiles = newProfiles
+            self.tableView.reloadData()
         })
         
     }

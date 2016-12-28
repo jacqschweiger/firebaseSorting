@@ -39,7 +39,8 @@ class Profile {
     func toAnyObject() -> Any {
         return [
             "name": name,
-            "age": age
+            "age": age,
+            "userID": userID
         ]
     }
     

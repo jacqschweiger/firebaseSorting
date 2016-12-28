@@ -16,9 +16,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var ageLabel: UILabel!
-    @IBOutlet weak var hobbiesLabel: UILabel!
-    @IBOutlet weak var genderLabel: UILabel!
-    
     
     
     override func viewDidLoad() {
@@ -27,11 +24,7 @@ class DetailViewController: UIViewController {
         guard let profile = profile else { return }
         
         nameLabel.text = profile.name
-        profileImage.image = profile.profileImage
         ageLabel.text = "Age \(profile.age)"
-        hobbiesLabel.text = "Hobbies: \(profile.hobbies)"
-        genderLabel.text = profile.gender
-        
     }
     
     

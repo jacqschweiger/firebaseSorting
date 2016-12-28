@@ -8,30 +8,39 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class Profile {
     
+    let key: String
+    let ref: FIRDatabaseReference?
     var userID: Int
-    var backgroundColor: UIColor?
-    var gender: String
     var name: String
     var age: Int
-    var profileImage: UIImage
-    var hobbies: String
     
-    init(userID: Int, gender: String, name: String, age: Int, profileImage: UIImage, hobbies: String) {
+    init(key: String = "", userID: Int, name: String, age: Int) {
+        self.key = key
         self.userID = userID
-        self.gender = gender
         self.name = name
         self.age = age
-        self.profileImage = profileImage
-        self.hobbies = hobbies
-        
-        switch gender {
-        case "male": self.backgroundColor = UIColor.blue
-        case "female": self.backgroundColor = UIColor.green
-        default: self.backgroundColor = UIColor.white
-        }
+        self.ref = nil
+    }
+    
+    init(snapshot: FIRDataSnapshot) {
+        key = snapshot.key
+        let snapshotValue = snapshot.value as! [String: AnyObject]
+        name = snapshotValue["name"] as! String
+        age = snapshotValue["age"] as! Int
+        userID = snapshotValue["userID"] as! Int
+        ref = snapshot.ref
+    }
+    
+    
+    func toAnyObject() -> Any {
+        return [
+            "name": name,
+            "age": age
+        ]
     }
     
 }

@@ -14,7 +14,6 @@
 		710EB8A41E0B5FC000BF34FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 710EB8A21E0B5FC000BF34FC /* LaunchScreen.storyboard */; };
 		710EB8AC1E0B600F00BF34FC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710EB8AB1E0B600F00BF34FC /* Profile.swift */; };
 		710EB8AE1E0B603200BF34FC /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710EB8AD1E0B603200BF34FC /* DetailViewController.swift */; };
-		710EB8B01E0B605A00BF34FC /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710EB8AF1E0B605A00BF34FC /* ProfileTableViewCell.swift */; };
 		710EB8B21E0B608100BF34FC /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710EB8B11E0B608100BF34FC /* ProfileTableViewController.swift */; };
 		715D601E1E0CA7D30028354B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 715D601D1E0CA7D30028354B /* GoogleService-Info.plist */; };
 		E426ECFD8E1E59C6906D3E3D /* Pods_firebaseProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E03188EB15485A698E564E6 /* Pods_firebaseProject.framework */; };
@@ -31,11 +30,11 @@
 		710EB8A01E0B5FC000BF34FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		710EB8A31E0B5FC000BF34FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		710EB8A51E0B5FC000BF34FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		710EB8AB1E0B600F00BF34FC /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Profile.swift; path = ../Profile.swift; sourceTree = "<group>"; };
-		710EB8AD1E0B603200BF34FC /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = ../DetailViewController.swift; sourceTree = "<group>"; };
-		710EB8AF1E0B605A00BF34FC /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileTableViewCell.swift; path = ../ProfileTableViewCell.swift; sourceTree = "<group>"; };
-		710EB8B11E0B608100BF34FC /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileTableViewController.swift; path = ../ProfileTableViewController.swift; sourceTree = "<group>"; };
+		710EB8AB1E0B600F00BF34FC /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		710EB8AD1E0B603200BF34FC /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		710EB8B11E0B608100BF34FC /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		715D601D1E0CA7D30028354B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		71FBC4EB1E143C4C0095E450 /* firebaseBridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = firebaseBridgingHeader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,19 +87,46 @@
 		710EB8951E0B5FC000BF34FC /* firebaseProject */ = {
 			isa = PBXGroup;
 			children = (
-				710EB8961E0B5FC000BF34FC /* AppDelegate.swift */,
-				710EB8AD1E0B603200BF34FC /* DetailViewController.swift */,
-				710EB8AF1E0B605A00BF34FC /* ProfileTableViewCell.swift */,
-				710EB8B11E0B608100BF34FC /* ProfileTableViewController.swift */,
-				710EB8AB1E0B600F00BF34FC /* Profile.swift */,
-				710EB89A1E0B5FC000BF34FC /* Main.storyboard */,
+				71FBC4EE1E14469C0095E450 /* Models */,
+				71FBC4EF1E1446B50095E450 /* Controllers */,
+				71FBC4F01E1446D30095E450 /* Layout */,
 				710EB8A01E0B5FC000BF34FC /* Assets.xcassets */,
-				710EB8A21E0B5FC000BF34FC /* LaunchScreen.storyboard */,
+				710EB8961E0B5FC000BF34FC /* AppDelegate.swift */,
 				710EB8A51E0B5FC000BF34FC /* Info.plist */,
 				715D601D1E0CA7D30028354B /* GoogleService-Info.plist */,
+				71FBC4EB1E143C4C0095E450 /* firebaseBridgingHeader.h */,
 				710EB89D1E0B5FC000BF34FC /* firebaseProject.xcdatamodeld */,
 			);
 			path = firebaseProject;
+			sourceTree = "<group>";
+		};
+		71FBC4EE1E14469C0095E450 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				710EB8AB1E0B600F00BF34FC /* Profile.swift */,
+			);
+			name = Models;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		71FBC4EF1E1446B50095E450 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				710EB8B11E0B608100BF34FC /* ProfileTableViewController.swift */,
+				710EB8AD1E0B603200BF34FC /* DetailViewController.swift */,
+			);
+			name = Controllers;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		71FBC4F01E1446D30095E450 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				710EB89A1E0B5FC000BF34FC /* Main.storyboard */,
+				710EB8A21E0B5FC000BF34FC /* LaunchScreen.storyboard */,
+			);
+			name = Layout;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,7 +256,6 @@
 				710EB8B21E0B608100BF34FC /* ProfileTableViewController.swift in Sources */,
 				710EB8AC1E0B600F00BF34FC /* Profile.swift in Sources */,
 				710EB8AE1E0B603200BF34FC /* DetailViewController.swift in Sources */,
-				710EB8B01E0B605A00BF34FC /* ProfileTableViewCell.swift in Sources */,
 				710EB8971E0B5FC000BF34FC /* AppDelegate.swift in Sources */,
 				710EB89F1E0B5FC000BF34FC /* firebaseProject.xcdatamodeld in Sources */,
 			);
@@ -245,6 +270,7 @@
 				710EB89B1E0B5FC000BF34FC /* Base */,
 			);
 			name = Main.storyboard;
+			path = firebaseProject;
 			sourceTree = "<group>";
 		};
 		710EB8A21E0B5FC000BF34FC /* LaunchScreen.storyboard */ = {
@@ -253,6 +279,7 @@
 				710EB8A31E0B5FC000BF34FC /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = firebaseProject;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

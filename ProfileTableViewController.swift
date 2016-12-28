@@ -16,7 +16,7 @@ class ProfileTableViewController: UITableViewController {
     let ref = FIRDatabase.database().reference(withPath: "profile_names")
     
     @IBAction func addButtonTapped(_ sender: Any) {
-        print("add button tapped")
+        
         let alert = UIAlertController(title: "Profile",
                                       message: "Add New Profile",
                                       preferredStyle: .alert)
@@ -47,13 +47,12 @@ class ProfileTableViewController: UITableViewController {
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
-        print("end of add button tapped")
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewdidload")
-        createProfiles()
+
         
         ref.observe(.value, with: { snapshot in
             var newProfiles: [Profile] = []
@@ -98,19 +97,17 @@ class ProfileTableViewController: UITableViewController {
         }
     }
     
-    
-    func createProfiles(){
-        let profile1 = Profile(userID: 111, name: "Lucy", age: 7)
-        let profile2 = Profile(userID: 112, name: "Buddy", age: 5)
-        let profile3 = Profile(userID: 113, name: "Ruby", age: 3)
-        
-        profiles = [profile1, profile2, profile3]
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
     
-    
-    
-    
-    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let profile = profiles[indexPath.row]
+            profile.ref?.removeValue()
+        }
+    }
+
     
 }
 

@@ -12,57 +12,40 @@ import Firebase
 class ProfileTableViewController: UITableViewController {
     
     var profiles = [Profile]()
-
+    
     let ref = FIRDatabase.database().reference(withPath: "profile_names")
     
-    @IBAction func addButtonTapped(_ sender: Any) {
-        
-        let alert = UIAlertController(title: "Profile",
-                                      message: "Add New Profile",
-                                      preferredStyle: .alert)
-        
-        let saveAction = UIAlertAction(title: "Save",
-                                       style: .default) { _ in
-                                        // 1
-                                        guard let textField = alert.textFields?.first,
-                                            let text = textField.text else { return }
-                                        
-                                        // 2
-                                        let profile = Profile(userID: 123, name: text, age: 10)
-                                        
-                                        // 3
-                                        let profileRef = self.ref.child(text.lowercased())
-                                        
-                                        // 4
-                                        profileRef.setValue(profile.toAnyObject())
-                                        print("save pressed")
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    @IBAction func adjustDataPressed(_ sender: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            sortAToZ()
+        case 1:
+            sortZToA()
+        case 2:
+            print("filter pressed")
+        default:
+            print("error")
         }
-        
-        let cancelAction = UIAlertAction(title: "Cancel",
-                                         style: .default)
-        
-        alert.addTextField()
-        
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true, completion: nil)
-        
+    }
+    
+    @IBAction func addButtonTapped(_ sender: Any) {
+        createAlert()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         ref.observe(.value, with: { snapshot in
             var newProfiles: [Profile] = []
-
+            
             for profile in snapshot.children {
-
+                
                 let newProfile = Profile(snapshot: profile as! FIRDataSnapshot)
                 newProfiles.append(newProfile)
             }
-
+            
             self.profiles = newProfiles
             self.tableView.reloadData()
         })
@@ -107,7 +90,55 @@ class ProfileTableViewController: UITableViewController {
             profile.ref?.removeValue()
         }
     }
-
     
+    func createAlert(){
+        let alert = UIAlertController(title: "Profile",
+                                      message: "Add New Profile",
+                                      preferredStyle: .alert)
+        
+        let saveAction = UIAlertAction(title: "Save",
+                                       style: .default) { _ in
+                                        // 1
+                                        guard let textField = alert.textFields?.first,
+                                            let text = textField.text else { return }
+                                        
+                                        // 2
+                                        let profile = Profile(userID: 123, name: text, age: 10)
+                                        
+                                        // 3
+                                        let profileRef = self.ref.child(text.lowercased())
+                                        
+                                        // 4
+                                        profileRef.setValue(profile.toAnyObject())
+                                        print("save pressed")
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .default)
+        
+        alert.addTextField()
+        
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func sortAToZ() {
+        self.profiles.sort { (profile1, profile2) -> Bool in
+            profile1.name < profile2.name
+        }
+        
+        self.tableView.reloadData()
+    }
+    
+    func sortZToA() {
+        self.profiles.sort { (profile1, profile2) -> Bool in
+            profile1.name > profile2.name
+        }
+        
+        self.tableView.reloadData()
+    }
+
 }
 

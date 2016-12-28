@@ -52,12 +52,28 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Pyn-as-Rhh">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="S2A-Lr-FRJ">
+                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="A-Z"/>
+                                <segment title="Z-A"/>
+                                <segment title="Filter"/>
+                            </segments>
+                            <connections>
+                                <action selector="adjustDataPressed:" destination="dzr-zd-b34" eventType="valueChanged" id="ZSL-Zs-zqc"/>
+                            </connections>
+                        </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1AZ-yv-hNX">
                             <connections>
                                 <action selector="addButtonTapped:" destination="dzr-zd-b34" id="57J-CB-Ls5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="segmentedControl" destination="S2A-Lr-FRJ" id="SQh-Zl-Tc0"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9R4-rd-Xka" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-//TODO: use firebase to sort, add field to choose age on add new profile, automatically create new userID
+//TODO: filter by gender, sort by userID as default, automatically create new userID
 
 class ProfileTableViewController: UITableViewController {
     
@@ -38,6 +38,8 @@ class ProfileTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        getIDs()
         
         ref.observe(.value, with: { snapshot in
             var newProfiles: [Profile] = []
@@ -99,13 +101,13 @@ class ProfileTableViewController: UITableViewController {
         let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
             
             guard let textField1 = alert.textFields?[0], let nameText = textField1.text else { return }
-        
+            
             guard let textField2 = alert.textFields?[1], let ageText = textField2.text else { return }
-
+            
             let profile = Profile(userID: 123, name: nameText, age: Int(ageText)!)
             
             let profileRef = self.ref.child(nameText.lowercased())
-
+            
             profileRef.setValue(profile.toAnyObject())
             
         }
@@ -117,8 +119,7 @@ class ProfileTableViewController: UITableViewController {
             textField.placeholder = "Enter Age"
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel",
-                                         style: .default)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
         
         alert.addAction(saveAction)
         alert.addAction(cancelAction)
@@ -126,22 +127,56 @@ class ProfileTableViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    //TODO: use firebase query to sort so dynamic
+    
     func sortAToZ() {
-        self.profiles.sort { (profile1, profile2) -> Bool in
-            profile1.name < profile2.name
-        }
+        ref.queryOrdered(byChild: "name").observe(.value, with: { (snapshot) in
+            print("printing snapshot: \(snapshot)")
+            
+            var newProfiles: [Profile] = []
+            
+            for profile in snapshot.children {
+                
+                let newProfile = Profile(snapshot: profile as! FIRDataSnapshot)
+                newProfiles.append(newProfile)
+            }
+            
+            self.profiles = newProfiles
+            self.tableView.reloadData()
+        })
         
-        self.tableView.reloadData()
     }
     
     func sortZToA() {
-        self.profiles.sort { (profile1, profile2) -> Bool in
-            profile1.name > profile2.name
-        }
-        
-        self.tableView.reloadData()
+        ref.queryOrdered(byChild: "name").observe(.value, with: { (snapshot) in
+            print("printing snapshot: \(snapshot)")
+            
+            var newProfiles: [Profile] = []
+            
+            for profile in snapshot.children {
+                
+                let newProfile = Profile(snapshot: profile as! FIRDataSnapshot)
+                newProfiles.append(newProfile)
+            }
+            
+            self.profiles = newProfiles.reversed()
+            self.tableView.reloadData()
+        })
     }
-
+    
+    func getIDs() {
+        
+        print("get ids called")
+        
+        ref.child("name").observe(.value, with: { (snapshot) in
+            if let result = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                for child in result {
+                    let orderID = child.key
+                    print("///////printing ids: \(orderID) ///////")
+                }
+            }
+ 
+        })
+    }
+    
 }
 

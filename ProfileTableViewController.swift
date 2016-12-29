@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 
+//TODO: use firebase to sort, add field to choose age on add new profile, automatically create new userID
+
 class ProfileTableViewController: UITableViewController {
     
     var profiles = [Profile]()
@@ -92,31 +94,31 @@ class ProfileTableViewController: UITableViewController {
     }
     
     func createAlert(){
-        let alert = UIAlertController(title: "Profile",
-                                      message: "Add New Profile",
-                                      preferredStyle: .alert)
+        let alert = UIAlertController(title: "Profile", message: "Add New Profile", preferredStyle: .alert)
         
-        let saveAction = UIAlertAction(title: "Save",
-                                       style: .default) { _ in
-                                        // 1
-                                        guard let textField = alert.textFields?.first,
-                                            let text = textField.text else { return }
-                                        
-                                        // 2
-                                        let profile = Profile(userID: 123, name: text, age: 10)
-                                        
-                                        // 3
-                                        let profileRef = self.ref.child(text.lowercased())
-                                        
-                                        // 4
-                                        profileRef.setValue(profile.toAnyObject())
-                                        print("save pressed")
+        let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
+            
+            guard let textField1 = alert.textFields?[0], let nameText = textField1.text else { return }
+        
+            guard let textField2 = alert.textFields?[1], let ageText = textField2.text else { return }
+
+            let profile = Profile(userID: 123, name: nameText, age: Int(ageText)!)
+            
+            let profileRef = self.ref.child(nameText.lowercased())
+
+            profileRef.setValue(profile.toAnyObject())
+            
+        }
+        
+        alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Enter First Name"
+        }
+        alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Enter Age"
         }
         
         let cancelAction = UIAlertAction(title: "Cancel",
                                          style: .default)
-        
-        alert.addTextField()
         
         alert.addAction(saveAction)
         alert.addAction(cancelAction)

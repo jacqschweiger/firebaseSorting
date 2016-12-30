@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-//TODO: filter by gender, sort by userID as default, automatically create new userID
+//TODO: filter by gender, automatically create new userID & sort by userID as default, add camera capability, add editing capability
 
 class ProfileTableViewController: UITableViewController {
     
@@ -26,7 +26,9 @@ class ProfileTableViewController: UITableViewController {
         case 1:
             sortZToA()
         case 2:
-            print("filter pressed")
+            showFemales()
+        case 3:
+            showMales()
         default:
             print("error")
         }
@@ -38,8 +40,6 @@ class ProfileTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        getIDs()
         
         ref.observe(.value, with: { snapshot in
             var newProfiles: [Profile] = []
@@ -69,7 +69,7 @@ class ProfileTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath)
         
         cell.textLabel?.text = profiles[indexPath.row].name
-        cell.detailTextLabel?.text = "ID: \(profiles[indexPath.row].userID)"
+        cell.detailTextLabel?.text = profiles[indexPath.row].gender
         cell.backgroundColor = UIColor(red: 0/255, green: 214/255, blue: 203/255, alpha: 1.0)
         return cell
     }
@@ -104,7 +104,15 @@ class ProfileTableViewController: UITableViewController {
             
             guard let textField2 = alert.textFields?[1], let ageText = textField2.text else { return }
             
-            let profile = Profile(userID: 123, name: nameText, age: Int(ageText)!)
+            guard let textField3 = alert.textFields?[2], let genderText = textField3.text else { return }
+            
+            let profile = Profile(name: nameText, age: Int(ageText)!, gender: genderText)
+            
+//            let profileIDRef = self.ref.childByAutoId()
+//            
+//            let profileIDKey = profileIDRef.key
+//            
+//            print("\n\n\n\n\n///////this is the profileIDKey: \(profileIDKey)////////////\n\n\n")
             
             let profileRef = self.ref.child(nameText.lowercased())
             
@@ -117,6 +125,9 @@ class ProfileTableViewController: UITableViewController {
         }
         alert.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Enter Age"
+        }
+        alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Enter Gender: M/F"
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .default)
@@ -163,18 +174,54 @@ class ProfileTableViewController: UITableViewController {
         })
     }
     
+    func showFemales(){
+        
+        ref.queryOrdered(byChild: "gender").queryEqual(toValue: "F").observe(.value, with: { (snapshot) in
+            
+            var femaleProfiles: [Profile] = []
+            
+            for female in snapshot.children {
+                print("female: \(female)")
+                let femaleProfile = Profile(snapshot: female as! FIRDataSnapshot)
+                femaleProfiles.append(femaleProfile)
+            }
+            
+            self.profiles = femaleProfiles
+            self.tableView.reloadData()
+        })
+    }
+    
+    func showMales(){
+        
+        ref.queryOrdered(byChild: "gender").queryEqual(toValue: "M").observe(.value, with: { (snapshot) in
+            
+            var maleProfiles: [Profile] = []
+            
+            for male in snapshot.children {
+                print("male: \(male)")
+                let maleProfile = Profile(snapshot: male as! FIRDataSnapshot)
+                maleProfiles.append(maleProfile)
+            }
+            
+            self.profiles = maleProfiles
+            self.tableView.reloadData()
+        })
+    }
+    
+    
+    
+    //TODO: get integer IDs
     func getIDs() {
         
-        print("get ids called")
+        print("/////////get ids called//////////////\n\n\n")
         
-        ref.child("name").observe(.value, with: { (snapshot) in
+        ref.observeSingleEvent(of: .value, with: { snapshot in
             if let result = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                for child in result {
-                    let orderID = child.key
-                    print("///////printing ids: \(orderID) ///////")
+                for profile in result {
+                    let id = profile.key
+                    print("///////printing ids: \(id) ///////")
                 }
             }
- 
         })
     }
     

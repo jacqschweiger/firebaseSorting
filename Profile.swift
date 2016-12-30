@@ -14,15 +14,15 @@ class Profile {
     
     let key: String
     let ref: FIRDatabaseReference?
-    var userID: Int
     var name: String
     var age: Int
+    var gender: String
     
-    init(key: String = "", userID: Int, name: String, age: Int) {
+    init(key: String = "", name: String, age: Int, gender: String) {
         self.key = key
-        self.userID = userID
         self.name = name
         self.age = age
+        self.gender = gender
         self.ref = nil
     }
     
@@ -31,7 +31,7 @@ class Profile {
         let snapshotValue = snapshot.value as! [String: AnyObject]
         name = snapshotValue["name"] as! String
         age = snapshotValue["age"] as! Int
-        userID = snapshotValue["userID"] as! Int
+        gender = snapshotValue["gender"] as! String
         ref = snapshot.ref
     }
     
@@ -40,7 +40,7 @@ class Profile {
         return [
             "name": name,
             "age": age,
-            "userID": userID
+            "gender": gender
         ]
     }
     

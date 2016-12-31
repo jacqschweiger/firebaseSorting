@@ -18,6 +18,7 @@ class Profile {
     var age: Int
     var gender: String
     var hobbies: String?
+    var profileImage: UIImage?
     
     init(key: String = "", name: String, age: Int, gender: String) {
         self.key = key
@@ -34,6 +35,7 @@ class Profile {
         age = snapshotValue["age"] as! Int
         gender = snapshotValue["gender"] as! String
         hobbies = snapshotValue["hobbies"] as? String
+        profileImage = snapshotValue["profileImage"] as? UIImage
         ref = snapshot.ref
     }
     
@@ -43,6 +45,12 @@ class Profile {
             "name": name,
             "age": age,
             "gender": gender
+        ]
+    }
+    
+    func saveImage() -> Any {
+        return [
+            "profileImage": profileImage,
         ]
     }
     

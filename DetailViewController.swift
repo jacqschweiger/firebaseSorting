@@ -8,16 +8,34 @@
 
 import Foundation
 import UIKit
+import Firebase
+import FirebaseStorage
 
 class DetailViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    let storage = FIRStorage.storage()
+    let storageRef = storage.reference(forURL: fir-sorting-ef4b9.appspot.com)
     var profile: Profile!
+    var hobbies: String?
     let picker = UIImagePickerController()
+    let ref = FIRDatabase.database().reference(withPath: "profile_names")
+    
+    @IBAction func addHobbies(_ sender: Any) {
+        let alertVC = UIAlertController(title: "Add Hobbies", message: "", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style:.default, handler: nil)
+        guard let textField = alertVC.textFields?.first, let hobbiesText = textField.text else { return }
+        alertVC.addTextField { (textfield : UITextField!) -> Void in
+        }
+        alertVC.addAction(okAction)
+        present(alertVC, animated: true, completion: nil)
+
+        ref.child("hobbies").setValue(hobbies)
+    }
     
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var myImageView: UIImageView!
+    @IBOutlet weak var hobbiesText: UILabel!
     
     
     @IBAction func photoFromLibrary(_ sender: UIBarButtonItem) {
@@ -66,10 +84,11 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate, UI
     //MARK: - Delegates
     
     func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        var  chosenImage = UIImage()
+        var chosenImage = UIImage()
         chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         myImageView.contentMode = .scaleAspectFit
         myImageView.image = chosenImage
+                
         dismiss(animated:true, completion: nil)
     }
     
@@ -78,5 +97,6 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate, UI
         dismiss(animated: true, completion: nil)
     }
     
+
     
 }

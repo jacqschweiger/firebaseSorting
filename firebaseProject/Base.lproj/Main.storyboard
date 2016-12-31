@@ -22,18 +22,18 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xCE-NB-DGE" id="a0D-xA-X36">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="69"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="69.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5QZ-a9-cxm">
-                                            <rect key="frame" x="15" y="24" width="34" height="21"/>
+                                            <rect key="frame" x="15" y="25" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KVR-ec-zrw">
-                                            <rect key="frame" x="296" y="24" width="44" height="21"/>
+                                            <rect key="frame" x="296" y="25" width="44" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -117,18 +117,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="qvi-uS-eKa">
-                        <barButtonItem key="leftBarButtonItem" title="Camera" id="dYs-mS-LqF">
+                    <toolbarItems>
+                        <barButtonItem title="Camera" id="dYs-mS-LqF">
                             <connections>
                                 <action selector="shootPhoto:" destination="gsd-PR-OiE" id="ROD-yl-ZmD"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Photo Library" id="LCB-Bw-JLl">
+                        <barButtonItem title="Photo Library" id="LCB-Bw-JLl">
                             <connections>
                                 <action selector="photoFromLibrary:" destination="gsd-PR-OiE" id="5I3-oO-Wef"/>
                             </connections>
                         </barButtonItem>
-                    </navigationItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="qvi-uS-eKa"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="ageLabel" destination="C9p-Uw-Qby" id="fwn-FZ-z8l"/>
                         <outlet property="myImageView" destination="oLV-tk-n61" id="PMc-fd-8db"/>

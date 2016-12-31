@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-//TODO: add editing hobbies capability, automatically create new userID & sort by userID as default
+//TODO: add editing hobbies capability, save images in Firebase Storage, automatically create new userID & sort by userID as default
 //TODO: extra -- add alpha sort capability when in filered view, maintain filtered view with profile added
 
 class ProfileTableViewController: UITableViewController {

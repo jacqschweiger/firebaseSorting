@@ -14,22 +14,21 @@ import FirebaseStorage
 class DetailViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     let storage = FIRStorage.storage()
-    let storageRef = storage.reference(forURL: fir-sorting-ef4b9.appspot.com)
     var profile: Profile!
     var hobbies: String?
     let picker = UIImagePickerController()
     let ref = FIRDatabase.database().reference(withPath: "profile_names")
     
+    @IBOutlet weak var hobbiesTextField: UITextField!
+    
+    //TODO: use button to enable editing in text field, save text into Firebase
     @IBAction func addHobbies(_ sender: Any) {
-        let alertVC = UIAlertController(title: "Add Hobbies", message: "", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style:.default, handler: nil)
-        guard let textField = alertVC.textFields?.first, let hobbiesText = textField.text else { return }
-        alertVC.addTextField { (textfield : UITextField!) -> Void in
-        }
-        alertVC.addAction(okAction)
-        present(alertVC, animated: true, completion: nil)
-
+        hobbiesTextField.isEnabled = true
+        hobbies = hobbiesTextField.text
+        
+        if !hobbiesTextField.isEditing {
         ref.child("hobbies").setValue(hobbies)
+        }
     }
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -63,8 +62,9 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+            
         picker.delegate = self
+        hobbiesTextField.isEnabled = false
         
         guard let profile = profile else { return }
         

@@ -17,6 +17,7 @@ class Profile {
     var name: String
     var age: Int
     var gender: String
+    var hobbies: String?
     
     init(key: String = "", name: String, age: Int, gender: String) {
         self.key = key
@@ -32,6 +33,7 @@ class Profile {
         name = snapshotValue["name"] as! String
         age = snapshotValue["age"] as! Int
         gender = snapshotValue["gender"] as! String
+        hobbies = snapshotValue["hobbies"] as? String
         ref = snapshot.ref
     }
     

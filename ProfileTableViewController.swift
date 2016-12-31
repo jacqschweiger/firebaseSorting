@@ -9,7 +9,8 @@
 import UIKit
 import Firebase
 
-//TODO: filter by gender, automatically create new userID & sort by userID as default, add camera capability, add editing capability
+//TODO: add editing hobbies capability, automatically create new userID & sort by userID as default
+//TODO: extra -- add alpha sort capability when in filered view, maintain filtered view with profile added
 
 class ProfileTableViewController: UITableViewController {
     

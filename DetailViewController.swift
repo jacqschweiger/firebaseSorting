@@ -29,7 +29,7 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate, UI
         picker.popoverPresentationController?.barButtonItem = sender
     }
     
-    @IBAction func shootPhoto(_ sender: UIBarButtonItem) {
+    @IBAction func shootPhoto(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             picker.allowsEditing = false
             picker.sourceType = UIImagePickerControllerSourceType.camera
